@@ -52,7 +52,7 @@ body.clean .stagecol>#dDesk,body.clean .today{box-shadow:none}
    =================================================================== */
 .drawer{--cream:#F4EFDB;--tan:#ECE3C1;--blue:#415FA6;--green:#48664A;--mint:#BCE0B9;--mint-bar:#abdfae;--red:#B7352A;
   --pad:20px;--t-xl:26px;--t-l:18px;--t-m:14px;--t-s:12px;--lh-d:1.35;--b-m:15px;--b-s:13px;
-  width:420px;height:min(780px,calc(100vh - 100px));min-height:560px;background:var(--cream);color:var(--blue);display:flex;flex-direction:column;position:relative;
+  width:420px;height:min(1080px,calc(100vh - 64px));min-height:560px;background:var(--cream);color:var(--blue);display:flex;flex-direction:column;position:relative;
   font-family:"New York","Iowan Old Style","Apple Garamond",Baskerville,Georgia,serif;font-size:var(--b-m);line-height:1.45}
 .drawer .hd{font-family:'TAN Memories',Georgia,serif;text-transform:uppercase;font-weight:400;letter-spacing:.01em;line-height:var(--lh-d)}
 .drawer button{font-family:inherit;color:inherit;cursor:pointer}
@@ -68,15 +68,13 @@ body.clean .stagecol>#dDesk,body.clean .today{box-shadow:none}
 .tk-track{display:inline-flex;gap:48px;padding-left:20px;animation:tk 22s linear infinite;font-family:'TAN Memories',Georgia,serif;text-transform:uppercase;font-size:var(--t-m);line-height:var(--lh-d);letter-spacing:.04em}
 @keyframes tk{to{transform:translateX(-50%)}}
 /* 3 reward bar */
-.rw{background:var(--mint);padding:16px var(--pad) 12px;text-align:center;position:relative}
+.rw{background:var(--mint);padding:16px var(--pad) 16px;text-align:center;position:relative}
 .drawer .rw-msg{margin-bottom:12px;font-size:var(--b-m);line-height:1.45;color:#3f5a41}
 .rw-msg b{color:var(--green);font-weight:700}
-.barrow{display:flex;align-items:flex-start;gap:12px}
-.bar{flex:1;margin-top:14px;height:12px;border-radius:99px;background:rgba(255,255,255,.55);overflow:hidden}
+.barrow{display:flex;align-items:center;gap:12px}
+.bar{flex:1;height:12px;border-radius:99px;background:rgba(255,255,255,.55);overflow:hidden}
 .fill{height:100%;min-width:12px;border-radius:99px;background-color:var(--green);background-image:linear-gradient(-45deg,rgba(255,255,255,.18) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.18) 50%,rgba(255,255,255,.18) 75%,transparent 75%,transparent);background-size:40px 40px;animation:mv 3s linear infinite;transition:width .5s ease}
 @keyframes mv{to{background-position:40px 40px}}
-.trk{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px}
-.trk-l{font-family:'TAN Memories',Georgia,serif;text-transform:uppercase;font-size:var(--t-s);line-height:1.2;text-align:center;color:var(--green)}
 .truck{flex:none;width:40px;height:40px;border-radius:50%;border:2px solid var(--green);background:var(--mint);display:flex;align-items:center;justify-content:center;color:var(--green)}
 .truck.on{background:var(--green);color:var(--mint)}
 /* scroll body */
@@ -289,7 +287,7 @@ body.clean .stagecol>#dDesk,body.clean .today{box-shadow:none}
 
     /* 3 reward bar */
     d+='<div class="rw rel">'+'<p class="rw-msg">'+(unlocked?'🎉 You’ve unlocked <b>FREE shipping</b>!':'You’re <b>'+money(t.gap)+'</b> away from <b>FREE shipping</b>! 🚚')+'</p>'+
-      '<div class="barrow"><div class="bar"><div class="fill'+(pct>=100?' full':'')+'" style="width:'+pct+'%"></div></div><div class="trk"><div class="truck'+(unlocked?' on':'')+'">'+(unlocked?I.check:I.truck)+'</div><span class="trk-l">Free<br>shipping</span></div></div></div>';
+      '<div class="barrow"><div class="bar"><div class="fill'+(pct>=100?' full':'')+'" style="width:'+pct+'%"></div></div><div class="truck'+(unlocked?' on':'')+'">'+(unlocked?I.check:I.truck)+'</div></div></div>';
 
     d+='<div class="sc">';
 
