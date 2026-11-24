@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>This Is My Housedress · Oxify cart · custom template mockup (v3)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* The theme's own heading font, loaded from the store's CDN (same file the live site uses). */
+@font-face{font-family:'TAN Memories';src:url('https://cdn.shopify.com/s/files/1/0888/3136/1345/files/tan-memories-2.woff?v=1738274165') format('woff');font-weight:normal;font-style:normal}
+
+/* ===== doc chrome (not part of the cart) ===== */
+:root{--ink:#1c1c1c;--muted:#5d6068;--line:#e2e4e9;--bg:#f3f4f7}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+.wrap{max-width:1640px;margin:0 auto;padding:28px 24px 90px}
+.mock{display:grid;grid-template-columns:270px 1fr;gap:32px;align-items:start}
+@media(max-width:1000px){.mock{grid-template-columns:1fr}}
+.panel{position:sticky;top:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;font-size:13px;max-height:calc(100vh - 24px);overflow:auto}
+.panel h4{margin:14px 0 6px;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.panel h4:first-child{margin-top:0}
+.panel label{display:flex;gap:7px;align-items:flex-start;margin:5px 0;cursor:pointer}
+.pbtn{font:600 13px Inter;background:var(--ink);color:#fff;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;width:100%;margin-top:10px}
+.stage{display:flex;gap:40px;justify-content:center;align-items:flex-start;flex-wrap:wrap}
+.stagecol>b{display:block;font:700 12px Inter,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 12px}
+.today{display:block;width:420px;height:auto;border-radius:14px;box-shadow:0 12px 40px rgba(30,30,60,.16)}
+.stagecol>#dDesk{box-shadow:0 12px 40px rgba(30,30,60,.16);border-radius:14px;overflow:hidden}
+.hint{color:var(--muted);font-size:12px;margin:14px 0 0;line-height:1.45}
+code{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#f0f2f5;padding:1px 5px;border-radius:4px}
+body.clean{background:#fff}
+body.clean .panel{display:none}
+body.clean .wrap{padding:24px}
+body.clean .mock{display:block}
+body.clean .stagecol>#dDesk,body.clean .today{box-shadow:none}
+
+/* ===================================================================
+   THE CART (everything below is the proposed drawer)
+
+   Design system, so nothing is "big here, small there":
+     Display (TAN Memories, caps, line-height 1.35, like the theme but a touch airier)
+       --t-xl 26  header (empty-state title 28)
+       --t-l  18  item name, section headings, subtotal, price
+       --t-m  14  ticker, card names, text links, buttons inside cards (checkout 19)
+       --t-s  12  tags, small print
+     Body (New York, line-height 1.45)
+       --b-m  15  messages, prices, field text
+       --b-s  13  meta, review line, terms
+   Spacing is a 4px grid: 4 / 8 / 12 / 16 / 20. Side gutter 20 (desktop) / 16 (phone).
+   Image: the theme's exact recipe (1px red #f00 border, hatched red+cream layer
+   behind it, offset down-right).
+   =================================================================== */
+.drawer{--cream:#F4EFDB;--tan:#ECE3C1;--blue:#415FA6;--green:#48664A;--mint:#BCE0B9;--mint-bar:#abdfae;--red:#B7352A;
+  --pad:20px;--t-xl:26px;--t-l:18px;--t-m:14px;--t-s:12px;--lh-d:1.35;--b-m:15px;--b-s:13px;
+  width:420px;height:min(780px,calc(100vh - 100px));min-height:560px;background:var(--cream);color:var(--blue);display:flex;flex-direction:column;position:relative;
+  font-family:"New York","Iowan Old Style","Apple Garamond",Baskerville,Georgia,serif;font-size:var(--b-m);line-height:1.45}
+.drawer .hd{font-family:'TAN Memories',Georgia,serif;text-transform:uppercase;font-weight:400;letter-spacing:.01em;line-height:var(--lh-d)}
+.drawer button{font-family:inherit;color:inherit;cursor:pointer}
+.drawer h2,.drawer h3,.drawer p{margin:0}
+
+/* 1 header */
+.dh{display:flex;align-items:center;justify-content:space-between;padding:12px var(--pad);border-bottom:1.5px solid var(--blue)}
+.dh h2{font-size:var(--t-xl)}
+.dh .ct{font-family:"New York",Georgia,serif;font-size:var(--b-m);text-transform:none;letter-spacing:0;opacity:.8;margin-left:8px}
+.x{background:none;border:0;padding:4px;width:36px;height:36px;margin-right:-8px}
+/* 2 ticker */
+.tk{background:var(--green);color:var(--tan);overflow:hidden;white-space:nowrap;height:32px;display:flex;align-items:center}
+.tk-track{display:inline-flex;gap:48px;padding-left:20px;animation:tk 22s linear infinite;font-family:'TAN Memories',Georgia,serif;text-transform:uppercase;font-size:var(--t-m);line-height:var(--lh-d);letter-spacing:.04em}
+@keyframes tk{to{transform:translateX(-50%)}}
+/* 3 reward bar */
+.rw{background:var(--mint);padding:16px var(--pad) 12px;text-align:center;position:relative}
+.drawer .rw-msg{margin-bottom:12px;font-size:var(--b-m);line-height:1.45;color:#3f5a41}
+.rw-msg b{color:var(--green);font-weight:700}
+.barrow{display:flex;align-items:flex-start;gap:12px}
+.bar{flex:1;margin-top:14px;height:12px;border-radius:99px;background:rgba(255,255,255,.55);overflow:hidden}
+.fill{height:100%;min-width:12px;border-radius:99px;background-color:var(--green);background-image:linear-gradient(-45deg,rgba(255,255,255,.18) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.18) 50%,rgba(255,255,255,.18) 75%,transparent 75%,transparent);background-size:40px 40px;animation:mv 3s linear infinite;transition:width .5s ease}
+@keyframes mv{to{background-position:40px 40px}}
+.trk{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px}
+.trk-l{font-family:'TAN Memories',Georgia,serif;text-transform:uppercase;font-size:var(--t-s);line-height:1.2;text-align:center;color:var(--green)}
+.truck{flex:none;width:40px;height:40px;border-radius:50%;border:2px solid var(--green);background:var(--mint);display:flex;align-items:center;justify-content:center;color:var(--green)}
+.truck.on{background:var(--green);color:var(--mint)}
+/* scroll body */
+.sc{flex:1;min-height:0;overflow-y:auto;padding:20px var(--pad) 8px;scrollbar-width:thin}
+.dh,.tk,.rw,.ft{flex-shrink:0}
+
+/* the theme's image treatment: red border + hatched red layer behind, offset down-right */
+.rimg{--o:6px;--sx:8px;--sy:9px;position:relative;display:block;margin:0 var(--o) var(--o) 0}
+.rimg::before{content:"";position:absolute;inset:var(--o) calc(var(--o)*-1) calc(var(--o)*-1) var(--o);border:1px solid #f00;border-radius:9px;background-color:#ECE3C1;
+  background-image:linear-gradient(131deg,#DC3021 5.56%,#F2EEDC 5.56%,#F2EEDC 50%,#DC3021 50%,#DC3021 55.56%,#F2EEDC 55.56%,#F2EEDC 100%);background-size:var(--sx) var(--sy)}
+.it>.rimg{align-self:start}
+.rimg img{position:relative;z-index:1;display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border:1px solid #f00;border-radius:6px;background:var(--tan)}
+
+/* 4 item */
+.it{display:grid;grid-template-columns:104px 1fr;gap:16px;padding-bottom:20px;border-bottom:1.5px dashed rgba(65,95,166,.35);margin-bottom:20px}
+.it-name{font-size:var(--t-l);margin-bottom:12px}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.pill{font-family:'TAN Memories',Georgia,serif;text-transform:uppercase;font-size:var(--t-s);line-height:1;padding:6px 10px 5px;border-radius:99px;border:1.5px solid var(--blue)}
+.pill.sale{background:var(--red);border-color:var(--red);color:#fff}
+.pill.final{background:var(--tan);border-color:var(--tan)}
+.price{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;line-height:1.3}
+.price .now{font-size:var(--t-l)}
+.price s{opacity:.6;font-size:var(--b-m)}
+.price .save{font-size:var(--b-s);color:var(--red);font-weight:600}
+.it-ctl{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.qty{display:inline-flex;align-items:center;border:1.5px solid var(--blue);border-radius:99px;padding:2px}
+.qty button{width:32px;height:32px;border-radius:50%;border:0;background:none;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center}
+.qty button:hover{background:var(--tan)}
+.qty span{min-width:28px;text-align:center;font-size:var(--b-m)}
+.rm{background:none;border:0;padding:4px 0;font-size:var(--b-m);line-height:1.45;text-decoration:underline;text-underline-offset:3px;opacity:.85}
+
+/* 5 review carousel: one line, auto-rotating */
+.rv{background:var(--tan);border-radius:10px;height:44px;margin-bottom:20px;overflow:hidden}
+.rvs{position:absolute;left:16px;right:16px;top:0;bottom:0;display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;font-size:var(--b-s);line-height:1.45;opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease;pointer-events:none}
+.rvs.on{opacity:1;transform:none}
+.rvs .st{color:#c58a12;letter-spacing:1px;flex:none}
+.rvs i{overflow:hidden;text-overflow:ellipsis}
+
+/* 6 pairs well */
+.pw-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.pw-h h3{font-size:var(--t-l)}
+.pw-arr{display:flex;gap:8px}
+.pw-arr b{width:36px;height:36px;border:1.5px solid var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--green);cursor:pointer}
+.pw-arr b:hover{background:var(--tan)}
+.strip{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 12px 16px 0;margin-right:calc(var(--pad)*-1);padding-right:var(--pad);scrollbar-width:none}
+.pc{flex:0 0 148px;scroll-snap-align:start;display:flex;flex-direction:column}
+.pc .rimg{--o:5px;--sx:7px;--sy:8px;margin-bottom:5px}
+.pc-n{font-family:'TAN Memories',Georgia,serif;text-transform:uppercase;font-size:var(--t-m);line-height:var(--lh-d);margin:12px 0 4px;min-height:calc(var(--t-m)*var(--lh-d)*2);flex:1}
+.pc-p{font-size:var(--b-m);line-height:1.45;margin-bottom:8px}
+.pc-p s{opacity:.55;margin-left:4px;font-size:var(--b-s)}
+.mini{position:relative;border:0;background:none;padding:0 3px 3px 0;width:100%}
+.mini::after{content:"";position:absolute;left:3px;top:3px;right:0;bottom:0;background:var(--tan);border-radius:99px}
+.mini span{position:relative;z-index:1;display:block;background:var(--green);color:var(--cream);border-radius:99px;padding:8px 12px 7px;font-family:'TAN Memories',Georgia,serif;text-transform:uppercase;font-size:var(--t-m);line-height:var(--lh-d);text-align:center;white-space:nowrap}
+.mini:hover span{transform:translate(1px,1px)}
+.mini.done span{background:var(--tan);color:var(--green);border:1.5px solid var(--green);padding:6px 12px 5px}
+.mini.done::after{display:none}
+
+/* footer */
+.ft{border-top:1.5px solid var(--blue);padding:12px var(--pad) 12px;background:var(--cream);position:relative;box-shadow:0 -10px 14px -10px rgba(65,95,166,.25)}
+.acts{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:var(--b-s);line-height:1.45}
+.acts button{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;text-underline-offset:3px;opacity:.85}
+.acts button:hover,.acts button.open{opacity:1}
+.acts i{font-style:normal;opacity:.5}
+.fld{display:flex;gap:8px;margin-bottom:8px}
+.fld input{flex:1;min-width:0;font:inherit;font-size:var(--b-m);line-height:1.45;color:var(--blue);background:#fff;border:1.5px solid var(--blue);border-radius:99px;padding:8px 16px;outline:0}
+.fld input::placeholder{color:rgba(65,95,166,.55)}
+.fld button{background:var(--blue);color:var(--cream);border:0;border-radius:99px;padding:0 20px;font-family:'TAN Memories',Georgia,serif;text-transform:uppercase;font-size:var(--t-m);line-height:var(--lh-d)}
+.terms{display:flex;gap:8px;align-items:flex-start;font-size:var(--t-s);line-height:1.45;margin-bottom:12px;cursor:pointer;opacity:.9}
+.terms .cb{flex:0 0 16px;height:16px;border:1.5px solid var(--blue);border-radius:4px;display:flex;align-items:center;justify-content:center;margin-top:2px;background:#fff}
+.terms .cb.on{background:var(--blue);color:#fff}
+.terms u{text-underline-offset:2px}
+.terms.err{color:var(--red)}
+.terms.err .cb{border-color:var(--red)}
+.errmsg{font-size:var(--t-s);line-height:1.45;color:var(--red);margin:-8px 0 12px 24px}
+.sub-row{display:flex;justify-content:space-between;align-items:baseline}
+.sub-row .lbl{font-size:var(--t-l)}
+.sub-row .val{font-size:var(--t-l);line-height:var(--lh-d)}
+.sub-row s{opacity:.55;font-size:var(--b-m);margin-right:8px}
+.ship-row{font-size:var(--t-s);line-height:1.45;margin:0 0 12px;opacity:.8}
+.ship-row b{color:var(--green)}
+.push{position:relative;display:block;width:100%;border:0;background:none;padding:0 4px 4px 0}
+.push::after{content:"";position:absolute;left:4px;top:4px;right:0;bottom:0;background:var(--tan);border-radius:99px}
+.push .sf{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:var(--cream);border-radius:99px;padding:11px 16px 10px;font-family:'TAN Memories',Georgia,serif;text-transform:uppercase;font-size:19px;line-height:var(--lh-d);letter-spacing:.02em;transition:transform .08s}
+.push:hover .sf{transform:translate(2px,2px)}
+.push:active .sf{transform:translate(4px,4px)}
+.push.shake .sf{animation:shk .35s}
+@keyframes shk{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.trust{display:flex;justify-content:space-between;gap:8px;margin:4px 0 20px;padding-top:20px;border-top:1.5px dashed rgba(65,95,166,.35);font-size:var(--b-s);line-height:1.35;text-align:center}
+.trust div{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}
+.trust svg{color:var(--green)}
+.payimg{display:block;width:100%;max-width:300px;height:auto;margin:12px auto 0}
+/* empty */
+.empty{flex:1;min-height:0;overflow-y:auto;padding:32px var(--pad) 40px;text-align:center}
+.empty h2{font-size:28px;margin-bottom:12px}
+.empty p{margin-bottom:20px}
+.empty .push{max-width:300px;margin:0 auto 32px}
+.empty .strip{justify-content:flex-start}
+.empty .pc,.empty .pw-h{text-align:left}
+.rel{position:relative}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mock">
+    <aside class="panel">
+      <h4>Cart state</h4>
+      <label><input type="radio" name="st" value="gap" checked> 1 dress · $10 from free shipping</label>
+      <label><input type="radio" name="st" value="unlocked"> Dress + scrunchie · free shipping unlocked</label>
+      <label><input type="radio" name="st" value="empty"> Empty cart</label>
+      <h4>Show / hide blocks</h4>
+      <label><input type="checkbox" data-opt="ticker" checked> Announcement ticker</label>
+      <label><input type="checkbox" data-opt="finalsale" checked> "Final sale" tag on item</label>
+      <label><input type="checkbox" data-opt="proof" checked> Review carousel (auto-rotating)</label>
+      <label><input type="checkbox" data-opt="pairs" checked> "Pairs well with" strip</label>
+      <label><input type="checkbox" data-opt="trust" checked> Trust row + payment icons</label>
+      <h4>Return-policy box</h4>
+      <label><input type="checkbox" data-opt="termsOn" checked> Starts ticked (like today)</label>
+      <button class="pbtn" id="reset">Reset demo</button>
+      <p class="hint">For a clean screenshot, open this page with <code>?clean</code> at the end of the address: the controls disappear and only the cart is left.</p>
+    </aside>
+    <div class="stage">
+      <div class="stagecol"><b>Current cart (live today)</b><img class="today" src="assets/housedress-cart-today.png" alt="Current cart on thisismyhousedress.com"></div>
+      <div class="stagecol"><b>Proposed cart</b><div id="dDesk"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* ---------- data (real products / prices from the PDP; USD) ---------- */
+  var IMG=function(u,w){return u+(u.indexOf('?')>-1?'&':'?')+'width='+(w||300)};
+  var P={
+    dress:{name:'Grace Housedress Pesto Dot',size:'XS',price:16500,was:22000,
+      img:'https://cdn.shopify.com/s/files/1/0888/3136/1345/files/DSCF3676.jpg?v=1787766389'},
+    scr:{name:'Salt & Pepper Gingham Scrunchie',price:1600,
+      img:'https://cdn.shopify.com/s/files/1/0888/3136/1345/files/ThisIsM_Outside438.jpg?v=1738260288'},
+    rec:[
+      {name:'Therese Housedress Affogato Dot',price:16500,was:22000,img:'https://cdn.shopify.com/s/files/1/0888/3136/1345/files/DSCF3783.jpg?v=1787765222'},
+      {name:'Rosalie Housedress Pinot Noir',price:14800,was:19800,img:'https://cdn.shopify.com/s/files/1/0888/3136/1345/files/DSCF2378.jpg?v=1787769069'},
+      {name:'Therese Housedress Pink Truffle Check',price:16500,was:22000,img:'https://cdn.shopify.com/s/files/1/0888/3136/1345/files/DSCF3355.jpg?v=1787766136'}
+    ]
+  };
+  /* verbatim from the Grace Pesto Dot reviews on the PDP */
+  var REVIEWS=[
+    'Super fun dress. Great quality!',
+    'Attractive, comfortable, easy!',
+    'The huge pockets are a plus also!',
+    'The Grace Pesto Dot is sooo cute!',
+    'The size chart is super accurate too'
+  ];
+  var PAYIMG='<img class="payimg" src="assets/housedress-payment-icons.png" alt="Accepted payments: Shop Pay, American Express, Apple Pay, Visa, Mastercard, Discover, Diners Club, PayPal">';
+  var THRESH=17500;
+  var defaults=function(){return {dress:1,scr:0,note:false,code:false,terms:true,err:false,
+    opt:{ticker:true,finalsale:true,proof:true,pairs:true,trust:true,termsOn:true}}};
+  var S=defaults();
+  var rvIdx=0, rvHover=false;
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var money=function(c){return '$'+(c/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',')};
+
+  var I={
+    x:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>',
+    truck:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/><path d="M14.5 17.5h-5M19.5 17.5h.8c.4 0 .6 0 .8-.2.2-.2.2-.4.2-.8V13a6.5 6.5 0 0 0-6.5-6.5M15 15.5V7c0-1.4 0-2.1-.4-2.6C14.1 4 13.4 4 12 4H6C4.6 4 3.9 4 3.4 4.4 3 4.9 3 5.6 3 7v7c0 1.4 0 2.1.4 2.6.5.4 1.2.4 2.6.4h1"/></svg>',
+    check:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+    lock:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+    note:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/></svg>',
+    tag:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.2"/></svg>',
+    swap:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h14l-3-3M20 16H6l3 3"/></svg>',
+    heart:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
+    left:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>',
+    right:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+    chk:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+  };
+    var rimg=function(src,w,alt){return '<span class="rimg"><img src="'+IMG(src,w)+'" alt="'+(alt||'')+'"></span>'};
+
+  function totals(){
+    var sub=S.dress*P.dress.price+S.scr*P.scr.price;
+    var orig=S.dress*P.dress.was+S.scr*P.scr.price;
+    return {sub:sub,orig:orig,save:orig-sub,gap:Math.max(0,THRESH-sub),count:S.dress+S.scr};
+  }
+
+  function pairs(){
+    var scr='<div class="pc">'+rimg(P.scr.img,320)+'<div class="pc-n">'+P.scr.name+'</div><div class="pc-p">'+money(P.scr.price)+'</div>'+
+      (S.scr>0?'<button class="mini done" disabled><span>In cart ✓</span></button>':'<button class="mini" data-act="addScr"><span>Add</span></button>')+'</div>';
+    var rest=P.rec.map(function(r){return '<div class="pc">'+rimg(r.img,320)+'<div class="pc-n">'+r.name+'</div><div class="pc-p">'+money(r.price)+'<s>'+money(r.was)+'</s></div><button class="mini" data-act="choose"><span>Choose size</span></button></div>'}).join('');
+    return '<div class="strip">'+scr+rest+'</div>';
+  }
+  function emptyStrip(){
+    return '<div class="strip">'+P.rec.map(function(r){return '<div class="pc">'+rimg(r.img,320)+'<div class="pc-n">'+r.name+'</div><div class="pc-p">'+money(r.price)+'<s>'+money(r.was)+'</s></div><button class="mini" data-act="choose"><span>Choose size</span></button></div>'}).join('')+'</div>';
+  }
+
+  function render(){
+    var t=totals(), o=S.opt, d='';
+    var unlocked=t.gap===0 && t.count>0;
+    var pct=Math.min(100,Math.round(t.sub/THRESH*100));
+    d+='<div class="drawer">';
+
+    /* 1 header */
+    d+='<div class="dh rel">'+'<h2 class="hd">Your cart'+(t.count?'<span class="ct">('+t.count+(t.count===1?' item':' items')+')</span>':'')+'</h2><button class="x" aria-label="Close cart">'+I.x+'</button></div>';
+
+    /* 2 ticker */
+    if(o.ticker){var line='<span>📦 Free shipping on orders $175+</span><span>🩷 25% off select styles</span>';
+      d+='<div class="tk rel">'+'<div class="tk-track">'+line+line+line+line+'</div></div>'}
+
+    if(t.count===0){
+      d+='<div class="empty"><h2 class="hd">Your cart is empty</h2><p>Let’s find your next favorite housedress.</p>'+
+        '<button class="push" data-act="shop"><span class="sf">Shop housedresses</span></button>'+
+        '<div class="pw-h"><h3 class="hd">Fan favorites</h3></div>'+emptyStrip()+'</div></div>';
+      return d;
+    }
+
+    /* 3 reward bar */
+    d+='<div class="rw rel">'+'<p class="rw-msg">'+(unlocked?'🎉 You’ve unlocked <b>FREE shipping</b>!':'You’re <b>'+money(t.gap)+'</b> away from <b>FREE shipping</b>! 🚚')+'</p>'+
+      '<div class="barrow"><div class="bar"><div class="fill'+(pct>=100?' full':'')+'" style="width:'+pct+'%"></div></div><div class="trk"><div class="truck'+(unlocked?' on':'')+'">'+(unlocked?I.check:I.truck)+'</div><span class="trk-l">Free<br>shipping</span></div></div></div>';
+
+    d+='<div class="sc">';
+
+    /* 4 dress line */
+    var dtags='<span class="pill">'+P.dress.size+'</span><span class="pill sale">Sale</span>'+(o.finalsale?'<span class="pill final">Final sale</span>':'');
+    d+='<div class="it rel">'+rimg(P.dress.img,260)+'<div><h3 class="it-name hd">'+P.dress.name+'</h3><div class="pills">'+dtags+'</div>'+
+      '<div class="price"><span class="now">'+money(P.dress.price*S.dress)+'</span><s>'+money(P.dress.was*S.dress)+'</s><span class="save">Save '+money((P.dress.was-P.dress.price)*S.dress)+'</span></div>'+
+      '<div class="it-ctl"><div class="qty"><button data-act="dec" aria-label="Decrease">−</button><span>'+S.dress+'</span><button data-act="inc" aria-label="Increase">+</button></div><button class="rm" data-act="rmDress">Remove</button></div></div></div>';
+    if(S.scr>0){
+      d+='<div class="it">'+rimg(P.scr.img,260)+'<div><h3 class="it-name hd">'+P.scr.name+'</h3>'+
+        '<div class="price" style="margin-top:12px"><span class="now">'+money(P.scr.price*S.scr)+'</span></div>'+
+        '<div class="it-ctl"><div class="qty"><button data-act="scrDec">−</button><span>'+S.scr+'</span><button data-act="scrInc">+</button></div><button class="rm" data-act="rmScr">Remove</button></div></div></div>';
+    }
+
+    /* 5 review carousel: one line, auto-rotating */
+    if(o.proof){
+      d+='<div class="rv rel" data-rv>'+
+        REVIEWS.map(function(q,i){return '<div class="rvs'+(i===rvIdx?' on':'')+'"><span class="st">★★★★★</span><i>“'+q+'”</i></div>'}).join('')+'</div>';
+    }
+
+    /* 6 pairs well */
+    if(o.pairs) d+='<div class="rel">'+'<div class="pw-h"><h3 class="hd">Pairs well with</h3><div class="pw-arr"><b>'+I.left+'</b><b>'+I.right+'</b></div></div>'+pairs()+'</div>';
+
+    /* 11a trust row at the bottom of the scrolling area */
+    if(o.trust){
+      d+='<div class="trust rel">'+'<div>'+I.lock+'<span>Secure<br>checkout</span></div><div>'+I.swap+'<span>30-day<br>exchanges*</span></div><div>'+I.heart+'<span>Women-owned<br>small business*</span></div></div>';
+    }
+    d+='</div>';
+
+    /* sticky footer: 7 note/code · 8 return policy · 9 subtotal/savings/shipping · 10 checkout · 11b payment icons */
+    d+='<div class="ft rel">'+
+      '<div class="acts rel"><button data-act="note" class="'+(S.note?'open':'')+'">Add a note</button><i>·</i><button data-act="code" class="'+(S.code?'open':'')+'">Discount code</button></div>';
+    if(S.note) d+='<div class="fld"><input placeholder="Anything we should know? (gift message, etc.)"></div>';
+    if(S.code) d+='<div class="fld"><input placeholder="Enter discount code"><button>Apply</button></div>';
+    d+='<div class="rel">'+'<div class="terms'+(S.err?' err':'')+'" data-act="terms"><span class="cb'+(S.terms?' on':'')+'">'+(S.terms?I.chk:'')+'</span><span>I agree to the <u>Return Policy</u>. Sale items are <b>final sale</b>.</span></div>'+
+      (S.err?'<div class="errmsg">Please tick the box to continue.</div>':'')+'</div>';
+    d+='<div class="rel">'+'<div class="sub-row"><span class="lbl hd">Subtotal</span><span class="val">'+(t.save>0?'<s>'+money(t.orig)+'</s>':'')+money(t.sub)+'</span></div>'+
+      '<div class="ship-row">'+(unlocked?'Free shipping applied':'Shipping calculated at checkout')+'</div></div>';
+    d+='<div class="rel">'+'<button class="push" data-act="checkout"><span class="sf">'+I.lock+' Checkout · '+money(t.sub)+'</span></button></div>';
+    if(o.trust) d+=PAYIMG;
+    d+='</div></div>';
+    return d;
+  }
+
+  function draw(){
+    $('#dDesk').innerHTML=render();
+  }
+
+  /* ---------- review carousel: auto-advances, pauses on hover ---------- */
+  function applyRv(){
+    document.querySelectorAll('[data-rv]').forEach(function(box){
+      box.querySelectorAll('.rvs').forEach(function(el,i){el.classList.toggle('on',i===rvIdx)});
+    });
+  }
+  setInterval(function(){ if(rvHover) return; rvIdx=(rvIdx+1)%REVIEWS.length; applyRv(); },3500);
+  document.addEventListener('mouseover',function(e){ if(e.target.closest&&e.target.closest('[data-rv]')) rvHover=true; });
+  document.addEventListener('mouseout',function(e){ if(e.target.closest&&e.target.closest('[data-rv]')) rvHover=false; });
+
+  /* ---------- interactions ---------- */
+  document.addEventListener('click',function(e){
+    var el=e.target.closest('[data-act]'); if(!el) return;
+    var a=el.getAttribute('data-act');
+    if(a==='inc') S.dress=Math.min(3,S.dress+1);
+    else if(a==='dec') S.dress=Math.max(1,S.dress-1);
+    else if(a==='rmDress'){S.dress=0;S.scr=0}
+    else if(a==='addScr') S.scr=1;
+    else if(a==='scrInc') S.scr=Math.min(5,S.scr+1);
+    else if(a==='scrDec') S.scr=Math.max(1,S.scr-1);
+    else if(a==='rmScr') S.scr=0;
+    else if(a==='note') S.note=!S.note;
+    else if(a==='code') S.code=!S.code;
+    else if(a==='terms'){S.terms=!S.terms;if(S.terms)S.err=false}
+    else if(a==='checkout'){
+      if(!S.terms){S.err=true;draw();document.querySelectorAll('.push[data-act=checkout]').forEach(function(b){b.classList.add('shake')});return}
+      alert('Checkout would open here (mockup).');return}
+    else if(a==='shop'||a==='choose'){return}
+    syncRadio();draw();
+  });
+  function syncRadio(){
+    var v=(S.dress===0)?'empty':(totals().gap===0?'unlocked':'gap');
+    var r=document.querySelector('input[name=st][value='+v+']'); if(r) r.checked=true;
+  }
+  document.querySelectorAll('input[name=st]').forEach(function(r){r.addEventListener('change',function(){
+    var v=r.value;
+    if(v==='gap'){S.dress=1;S.scr=0}
+    if(v==='unlocked'){S.dress=1;S.scr=1}
+    if(v==='empty'){S.dress=0;S.scr=0}
+    draw();
+  })});
+  document.querySelectorAll('[data-opt]').forEach(function(c){c.addEventListener('change',function(){
+    var k=c.getAttribute('data-opt');
+    S.opt[k]=c.checked;
+    if(k==='termsOn'){S.terms=c.checked;S.err=false}
+    draw();
+  })});
+  if(/[?&]clean/.test(location.search)) document.body.classList.add('clean');
+  $('#reset').addEventListener('click',function(){
+    S=defaults();rvIdx=0;
+    document.querySelectorAll('[data-opt]').forEach(function(c){c.checked=true});
+    document.querySelector('input[name=st][value=gap]').checked=true;
+    draw();
+  });
+  draw();
+})();
+</script>
+</body>
+</html>
